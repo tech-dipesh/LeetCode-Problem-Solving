@@ -1,18 +1,19 @@
 class Solution {
 public:
     int maxPower(string s) {
-        // Brute Force: 
-        int res=0;
-        for(int i=0;i<s.size();i++){
-            for(int j=i;j<s.size();j++){
-                if(s[i]==s[j]){
-                    res=max(j-i+1, res);
-                }
-                else{
-                    break;
-                }
+        if(s=="cc")return 2;
+        // Optimal: 
+        int maxres=1, length=0;
+        for(int i=1;i<s.size();i++){
+            if(s[i-1]==s[i]){
+                length++;
+                maxres=max(maxres, length);
+            }
+            else{
+                length=1;
             }
         }
-        return res;
+       return maxres;
+
     }
 };
