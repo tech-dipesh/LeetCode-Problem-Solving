@@ -1,28 +1,21 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        //Better Algorithm, with counting how many times it appeared
-        int zeroes=0, ones=0, twos=0;
-       for(int i: nums){
-        if(i==0){
-            zeroes++;
+        // Dutch Flag Algorithm
+     int low=0, medium=0, high=nums.size()-1;
+     while(medium<=high){
+        if(nums[medium]==0){
+            swap(nums[medium], nums[low]);
+            low++;
+            medium++;
         }
-        if(i==1){
-            ones++;
+       else if(nums[medium]==1){
+            medium++;
         }
-        if(i==2){
-            twos++;
+        else{
+            swap(nums[medium], nums[high]);
+            high--;
         }
-       }
-       int i=0; 
-       while(zeroes--){
-        nums[i++]=0;
-       }
-       while(ones--){
-        nums[i++]=1;
-       }
-       while(twos--){
-        nums[i++]=2;
-       }
+     }
     }
 };
