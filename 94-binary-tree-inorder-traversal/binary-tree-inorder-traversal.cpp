@@ -12,19 +12,19 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        // Iterative With Stack:
-        stack<TreeNode*>st;
+        // Recursive:
         vector<int>vt;
-        while(root || !st.empty()){
-           while(root){
-            st.push(root);
-            root=root->left;
-           }
-            root=st.top();
-            st.pop();
-            vt.push_back(root->val);
-            root=root->right;
-        }
+        Fun(vt, root);
         return vt;
+    }
+// Recrusive call with storing all result on vector:
+// have to do pass by reference to add on the vector.
+    void Fun(vector<int>&vt, TreeNode* root){
+        if(root==nullptr){
+            return;
+        }
+        Fun(vt, root->left);
+        vt.push_back(root->val);
+        Fun(vt, root->right);
     }
 };
