@@ -9,22 +9,23 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        if(head==nullptr || head->next==nullptr){
-            return nullptr;
-        }
-        ListNode* slow=head, *fast=head, *temp=head;
-        while(fast && fast->next){
-            slow=slow->next;
-            fast=fast->next->next;
-            if(slow==fast){
-                // if appear move temp until it doesn't come there.
-                while(temp!=slow){
-                    slow=slow->next;
-                    temp=temp->next;
-                }
-                return temp;
-            }
-        }
+    //    Base Case:
+    if(head==nullptr || head->next==nullptr){
         return nullptr;
+    }
+    ListNode* temp=head, *slow=head, *fast=head;
+    while(fast && fast->next){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast){
+            while(slow!=temp){
+                slow=slow->next;
+                temp=temp->next;
+            }
+            return temp;
+        }
+    }
+    // If no linked list no cycle found
+    return nullptr;
     }
 };
