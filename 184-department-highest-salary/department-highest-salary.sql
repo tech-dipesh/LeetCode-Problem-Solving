@@ -1,0 +1,2 @@
+-- Write your PostgreSQL query statement below
+select e.name as Employee, e.salary as Salary, d.name as Department from Employee e join Department d on e.departmentId=d.id where (e.departmentId, e.salary) in (select departmentId, max(salary) from Employee group by departmentId);
